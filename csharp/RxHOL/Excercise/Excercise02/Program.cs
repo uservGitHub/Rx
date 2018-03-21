@@ -52,10 +52,10 @@ namespace Excercise02
                 "Generate(0,i=>i<3,i=>i+1,i=>i*i)",
                 Observable.Generate(0, i => i < 3, i => i + 1, i => i * i)
                 ));
-            //list.Add(new Tuple<string, IObservable<int>>(
-            //    "Return(100,耗时100毫秒)",
-            //    Observable.Return<int>(100)
-            //    ));
+            list.Add(new Tuple<string, IObservable<int>>(
+                "Generate(0,i=>i<3,i=>i+1,i=>i*i,i=>TimeSpan.FromSeconds(0.5))",
+                Observable.Generate(0, i => i < 3, i => i + 1, i => i * i, i=>TimeSpan.FromSeconds(0.5))
+                ));
 
             return list;
         }
