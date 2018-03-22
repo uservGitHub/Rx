@@ -12,7 +12,7 @@ namespace Excercise03
     class Program
     {
         [STAThread]
-        static void Main(string[] args)
+        static void MainHold(string[] args)
         {
             //AppDomain domain1 = AppDomain.CreateDomain("1st");
             //string dlFile = @"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationFramework.dll";
@@ -191,6 +191,7 @@ namespace Excercise03
             //};
             var moves = Observable.FromEventPattern<System.Windows.Input.MouseEventArgs>(win, "MouseMove");
             var input = Observable.FromEventPattern(txt, "TextChanged");
+
             var moveSubscription = moves.Subscribe(evt =>
             {
                 Console.WriteLine("Mouse at: " + evt.EventArgs.GetPosition(win));

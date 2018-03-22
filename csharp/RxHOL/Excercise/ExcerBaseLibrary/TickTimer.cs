@@ -26,13 +26,15 @@ namespace ExcerBaseLibrary
             {
                 timer = new Timer(new TimerCallback((holder) =>
                 {
+                    DispatcherHelper.Initialize();
                     if (currentTask == null)
                     {
                         Next();
                     }
                     else
                     {
-                        currentTask.Item1.Invoke();
+                        DispatcherHelper.CheckBeginInvokeOnUI(currentTask.Item1);
+                        //currentTask.Item1.Invoke();
 
                         if(Begin == 0)
                             Begin = watch.ElapsedMilliseconds;

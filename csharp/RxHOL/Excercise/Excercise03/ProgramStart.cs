@@ -9,7 +9,7 @@ namespace Excercise03
 {
     class ProgramStart
     {
-        [STAThread]
+        [STAThread]//
         static void Main_NoOpen(string[] args)
         {
             System.Threading.Thread thread = new System.Threading.Thread(() =>
@@ -33,12 +33,13 @@ namespace Excercise03
             Application.Run(frm);
         }
 
-        [STAThread]
+        //[STAThread]
         static void Main_WPF()
         {
             System.Windows.Application app = new System.Windows.Application();
-            app.MainWindow = new System.Windows.Window();
-            app.Run(app.MainWindow);
+            //app.MainWindow = new System.Windows.Window();
+            var win = new System.Windows.Window();
+            app.Run(win);
         }
     }
 }
