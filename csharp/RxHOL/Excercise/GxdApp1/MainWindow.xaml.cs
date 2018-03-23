@@ -12,10 +12,13 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ExcerBaseLibrary;
+
+
 
 /// <summary>
 /// https://www.cnblogs.com/hayasi/p/6852474.html
@@ -34,6 +37,19 @@ namespace GxdApp1
             DispatcherHelper.Initialize();
             InitializeComponent();
             timer = new DispatcherTimer(DispatcherPriority.ApplicationIdle);
+            canvas = new Canvas()
+            {
+                Width = 100,
+                Height = 100,
+                Background = new SolidColorBrush(Color.FromArgb(10, 0, 0, 0)),
+                Visibility = Visibility.Hidden,
+            };
+            popup = new Popup()
+            {
+                Width = 200,
+                Height = 200,
+                Opacity = 160,
+            };
 
             InitEvents();
 
@@ -44,12 +60,14 @@ namespace GxdApp1
         }
         private Stopwatch watch = new Stopwatch();
         private DispatcherTimer timer = null;
+        private Canvas canvas = null;
+        private Popup popup = null;
 
         private void InitEvents()
         {
             timer.Tick += (sender, e) =>
             {
-                tbStartClock.Text = DateTime.Now.ToString(); ;
+                tbStartClock.Text = DateTime.Now.ToString();
             };
             timer.Interval = TimeSpan.FromMilliseconds(250);
             timer.Start();
@@ -75,7 +93,7 @@ namespace GxdApp1
                 t.ContinueWith(task =>
                 {
                     Console.WriteLine("任务完成,{0}", watch.ElapsedMilliseconds);
-                    Console.WriteLine("任务状态:IsCanceled={0}\tIsCompleted={1}\tIsFaulted={2}\tResult={3}", 
+                    Console.WriteLine("任务状态:IsCanceled={0}\tIsCompleted={1}\tIsFaulted={2}\tResult={3}",
                         task.IsCanceled, task.IsCompleted, task.IsFaulted, task.Result);
                 });
             };
@@ -130,6 +148,27 @@ namespace GxdApp1
                         ((Button)sender).IsEnabled = true;
                     });
                 });
+            };
+
+            btnPanelPosition.Click += (sender, e) =>
+            {
+                if (canvas.Visibility == Visibility.Hidden)
+                {
+                    canvas.Visibility = Visibility.Visible;
+                    Random random = new Random();
+                    //popup.Child = canvas;
+                    
+                    popup.HorizontalOffset = random.Next(0, (int)this.ActualWidth);
+                    popup.VerticalOffset = random.Next(0, (int)this.ActualHeight);
+                    popup.Opacity = 100;
+                    popup.IsOpen = true;
+                }
+                else
+                {
+                    popup.IsOpen = false;
+                    popup.Child = null;
+                    canvas.Visibility = Visibility.Hidden;
+                }
             };
         }
 

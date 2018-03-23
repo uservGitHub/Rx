@@ -22,6 +22,7 @@
             <Button x:Name="btnTaskOrderExcute" Content="OrderTask"/>
             <Button x:Name="btnTaskCanCancel" Content="CanCancelTask"/>
             <Button x:Name="btnCancelToken" Content="CancelToken" IsEnabled="False"/>
+            <Button x:Name="btnPanelPosition" Content="PanelPosition"/>
         </StackPanel>
         <!--功能区-->
         <!--<StackPanel Grid.Row="1" Orientation="Vertical">
